@@ -5,6 +5,8 @@ import Project3_cmd
 import Project3_sty
 import Fun
 import os
+import Card_Use
+import Use_List
 import Card
 import tkinter
 from   tkinter import *
@@ -34,8 +36,16 @@ class  Project3:
         Fun.SetControlPlace(uiName,'NoteBook_2',0,0,1400,820)
         PageFrame_1 = tkinter.ttk.Frame(NoteBook_2)
         PageFrame_1.place(x = 5,y = 25,width = 1390,height = 790)
-        Card.Card(PageFrame_1,False)
-        NoteBook_2.add(PageFrame_1,text = "针卡管理")
+        Card_Use.Card_Use(PageFrame_1,False)
+        NoteBook_2.add(PageFrame_1,text = "针卡领用")
+        PageFrame_2 = tkinter.ttk.Frame(NoteBook_2)
+        PageFrame_2.place(x = 5,y = 25,width = 1390,height = 790)
+        Use_List.Use_List(PageFrame_2,False)
+        NoteBook_2.add(PageFrame_2,text = "使用记录")
+        PageFrame_3 = tkinter.ttk.Frame(NoteBook_2)
+        PageFrame_3.place(x = 5,y = 25,width = 1390,height = 790)
+        Card.Card(PageFrame_3,False)
+        NoteBook_2.add(PageFrame_3,text = "针卡管理")
         Frame_11 = tkinter.Frame(Form_1)
         Fun.Register(uiName,'Frame_11',Frame_11)
         Fun.SetControlPlace(uiName,'Frame_11',1400,0,100,820)

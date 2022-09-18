@@ -66,10 +66,10 @@ class  Card:
         ListView_8.heading("针卡编号",anchor="center",text="针卡编号")
         ListView_8.column("S/N",anchor="center",width=80)
         ListView_8.heading("S/N",anchor="center",text="S/N")
-        ListView_8.column("Vendor",anchor="center",width=80)
-        ListView_8.heading("Vendor",anchor="center",text="Vendor")
         ListView_8.column("NSI编号",anchor="center",width=80)
         ListView_8.heading("NSI编号",anchor="center",text="NSI编号")
+        ListView_8.column("Vendor",anchor="center",width=80)
+        ListView_8.heading("Vendor",anchor="center",text="Vendor")
         ListView_8.column("验证状态",anchor="center",width=20)
         ListView_8.heading("验证状态",anchor="center",text="验证状态")
         ListView_8.column("使用状态",anchor="center",width=20)
@@ -130,7 +130,7 @@ class  Card:
         Fun.Register(uiName,'ComboBox_17',ComboBox_17)
         Fun.SetControlPlace(uiName,'ComboBox_17',600,40,130,20)
         ComboBox_17.configure(state = "readonly")
-        ComboBox_17["values"] = ['ALL','等待验证','验证OK','验证Fail','损坏','维修','报废']
+        ComboBox_17["values"] = ['','等待验证','验证OK','验证Fail','损坏','维修','报废']
         ComboBox_17.current(0)
         Entry_18_Variable = Fun.AddTKVariable(uiName,'Entry_18','')
         Entry_18 = tkinter.Entry(Form_1,textvariable=Entry_18_Variable)

@@ -85,5 +85,7 @@ def Button_6_onCommand(uiName,widgetName):
                 Fun.MessageBox("密码错误")
         else:
             Fun.MessageBox("存在多个相同用户")
+    elif text == "确认":
+        Fun.GetElement(uiName, "root").destroy()
     # 登录
     pass

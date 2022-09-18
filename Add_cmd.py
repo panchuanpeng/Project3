@@ -13,14 +13,6 @@ ElementBGArray_IM={}
 import DbBase
 import GridBase
 def Button_14_onCommand(uiName,widgetName):
-    sys.path.append("E:/github/TKinterDesigner-master/Project3")
-    topLevel = tkinter.Toplevel()
-    topLevel.attributes("-toolwindow", 1)
-    topLevel.wm_attributes("-topmost", 1)
-    import AddAccount
-    AddAccount.AddAccount(topLevel)
-    Fun.SetText("AddAccount", 'Button_6', '确认')
-    tkinter.Tk.wait_window(topLevel)
     # 增加 "Id","针卡编号","S/N","NSI编号","Vendor","验证状态","使用状态","适用产品","Td 预警量","Td 使用量","位置","备注"
     zk = Fun.GetText(uiName, 'Entry_8')
     sn = Fun.GetText(uiName, 'Entry_9')
