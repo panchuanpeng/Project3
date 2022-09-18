@@ -52,6 +52,15 @@ def getallData(uiName,TreeViewName):
         value_list.append(treeview.item(i)['values'])
     return value_list
 
+def getuselist(uiName,TreeViewName):
+    value_list = [["Id","针卡编号","日期","操作人","变更前验证状态","变更后验证状态","变更前使用状态","变更后使用状态"]]
+    treeview = Fun.GetElement(uiName,TreeViewName)
+    obj = treeview.get_children()
+    for i in obj:
+        value_list.append(treeview.item(i)['values'])
+    return value_list
+
+
 def edituser(uiName,TreeViewName,*item):
     treeview = Fun.GetElement(uiName,TreeViewName)
     index = treeview.selection()

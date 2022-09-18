@@ -12,6 +12,7 @@ ElementBGArray_Resize={}
 ElementBGArray_IM={} 
 import DbBase
 import GridBase
+import datetime
 def Button_14_onCommand(uiName,widgetName):
     # 增加 "Id","针卡编号","S/N","NSI编号","Vendor","验证状态","使用状态","适用产品","Td 预警量","Td 使用量","位置","备注"
     zk = Fun.GetText(uiName, 'Entry_8')
@@ -27,9 +28,16 @@ def Button_14_onCommand(uiName,widgetName):
     bz = Fun.GetText(uiName, 'Entry_18')
     txt = Fun.GetText('Add', 'Button_14')
     Fun.GetElement(uiName, 'root').destroy()
+    time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
+    user = Fun.GetText('Project3', 'Label_3')
     if (txt == "修改"):
+        item = GridBase.getSelected('Card', 'ListView_8')
+        yzq = item[5]
+        syq = item[6]
         item = GridBase.editSelected('Card', 'ListView_8', zk, sn, nsi, vd, yz, sy, cp, yj, td, wz, bz)
         DbBase.editcard(item[0], zk, sn, nsi, vd, yz, sy, cp, yj, td, wz, bz)
+        DbBase.adduse(zk, time_str, user, yzq, yz, syq, sy, td)
+        Fun.MessageBox("修改成功")
     else:
         card_list = [i[1] for i in DbBase.getData("card")]
         if zk in card_list:
@@ -37,6 +45,9 @@ def Button_14_onCommand(uiName,widgetName):
         else:
             id = DbBase.addcard(zk, sn, nsi, vd, yz, sy, cp, yj, td, wz, bz)
             GridBase.addCard('Card', 'ListView_8', id, zk, sn, nsi, vd, yz, sy, cp, yj, td, wz, bz)
+            yzq = "新增"
+            syq = "新增"
+            DbBase.adduse(zk, time_str, user, yzq, yz, syq, sy, td)
             Fun.MessageBox("该针卡编号添加成功")
 
 

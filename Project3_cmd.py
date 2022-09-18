@@ -14,6 +14,8 @@ ElementBGArray_IM={}
 import DbBase
 import AddAccount_cmd
 DbBase.inituser()
+DbBase.initcard()
+DbBase.inituselist()
 def Button_4_onCommand(uiName,widgetName):
     sys.path.append("E:/github/TKinterDesigner-master/Project3")
     topLevel = tkinter.Toplevel()
@@ -36,6 +38,7 @@ def Button_5_onCommand(uiName,widgetName):
     Fun.SetText("Project3", 'Label_9', "")
     Fun.GetElement("Project3", 'user').configure(bg="#eaeaea")
     Fun.GetElement("Project3", 'Label_9').configure(bg="#eaeaea")
+    Fun.GetElement("Project3", "NoteBook_2").hide(Fun.GetElement("Card", "root"))
     # 退出
     pass
 def Button_6_onCommand(uiName,widgetName):

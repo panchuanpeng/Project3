@@ -14,13 +14,44 @@ ElementBGArray_IM={}
 import DbBase
 import GridBase
 import datetime
-DbBase.initcard()
+close_flag = 0
+def close():
+	global close_flag
+	close_flag = 1
+	Fun.GetElement("AddAccount", 'root').destroy()
+
+
 def Button_4_onCommand(uiName,widgetName):
 	try:
+		global close_flag
+		close_flag = 0
+		if Fun.GetText('Project3','Label_3') == "":
+			Fun.MessageBox("请先登录,再进行修改!")
+			return
 		entry_list = 'Entry_8,Entry_9,Entry_10,Entry_11,ComboBox_26,ComboBox_27,Entry_14,Entry_15,Entry_16,Entry_17,Entry_18'.split(",")
 		item = GridBase.getSelected(uiName, 'ListView_8')
 		if (item == None):
-			Fun.MessageBox("请先选择数据,在进行修改!")
+			Fun.MessageBox("请先选择数据,再进行修改!")
+			return
+		topLevel = tkinter.Toplevel()
+		topLevel.attributes("-toolwindow", 1)
+		topLevel.wm_attributes("-topmost", 1)
+		topLevel.protocol('WM_DELETE_WINDOW', close)
+		import AddAccount
+		AddAccount.AddAccount(topLevel)
+		Fun.SetText("AddAccount", 'Button_6', '确认')
+		Fun.SetText("AddAccount", 'Entry_2', Fun.GetText('Project3', 'Label_3'))
+		Fun.GetElement("AddAccount", 'Entry_2')["state"] = "disabled"
+		Fun.GetElement("AddAccount", 'Label_8').destroy()
+		Fun.GetElement("AddAccount", 'Label_9').destroy()
+		Fun.GetElement("AddAccount", 'Entry_10').destroy()
+		Fun.GetElement("AddAccount", 'Entry_11').destroy()
+		tkinter.Tk.wait_window(topLevel)
+		if close_flag == 1:
+			return
+		password = Fun.GetInputDataArray("AddAccount")['Entry_3'][0]
+		if password != Fun.GetUserData('Project3', 'Label_3', 'password'):
+			Fun.MessageBox("密码错误")
 			return
 		sys.path.append("E:/github/TKinterDesigner-master/Project3")
 		topLevel = tkinter.Toplevel()
@@ -29,6 +60,7 @@ def Button_4_onCommand(uiName,widgetName):
 		import Add
 		Add.Add(topLevel)
 		Fun.SetText("Add", "Button_14", "修改")
+		item = DbBase.getcard(item[1])
 		for index,entry in enumerate(entry_list):
 			Fun.SetText("Add", entry, item[index+1])
 		Fun.GetElement("Add", 'Entry_8')["state"] = "disabled"
@@ -41,10 +73,40 @@ def Button_4_onCommand(uiName,widgetName):
 		Fun.MessageBox(f"Error: {e}")
 def Button_5_onCommand(uiName,widgetName):
 	try:
-		item = GridBase.deleteSelected(uiName, 'ListView_8')
+		global close_flag
+		close_flag = 0
+		if Fun.GetText('Project3','Label_3') == "":
+			Fun.MessageBox("请先登录,再进行删除!")
+			return
+		item = GridBase.getSelected(uiName, 'ListView_8')
 		if (item == None):
 			Fun.MessageBox("请先选择数据,在进行删除!")
 			return
+		topLevel = tkinter.Toplevel()
+		topLevel.attributes("-toolwindow", 1)
+		topLevel.wm_attributes("-topmost", 1)
+		topLevel.protocol('WM_DELETE_WINDOW', close)
+		import AddAccount
+		AddAccount.AddAccount(topLevel)
+		Fun.SetText("AddAccount", 'Button_6', '确认')
+		Fun.SetText("AddAccount", 'Entry_2', Fun.GetText('Project3', 'Label_3'))
+		Fun.GetElement("AddAccount", 'Entry_2')["state"] = "disabled"
+		Fun.GetElement("AddAccount", 'Label_8').destroy()
+		Fun.GetElement("AddAccount", 'Label_9').destroy()
+		Fun.GetElement("AddAccount", 'Entry_10').destroy()
+		Fun.GetElement("AddAccount", 'Entry_11').destroy()
+		tkinter.Tk.wait_window(topLevel)
+		if close_flag == 1:
+			return
+		password = Fun.GetInputDataArray("AddAccount")['Entry_3'][0]
+		if password != Fun.GetUserData('Project3', 'Label_3', 'password'):
+			Fun.MessageBox("密码错误")
+			return
+		time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
+		user = Fun.GetText('Project3', 'Label_3')
+		item = GridBase.deleteSelected(uiName, 'ListView_8')
+		item = DbBase.getcard(item[1])
+		DbBase.adduse(item[1], time_str, user, item[5], "删除", item[6], "未使用", item[9])
 		DbBase.deletecard(item[0])
 		# 删除
 		pass
@@ -62,6 +124,9 @@ def Button_6_onCommand(uiName,widgetName):
 		Fun.MessageBox(f"Error: {e}")
 def Button_3_onCommand(uiName,widgetName):
 	try:
+		if Fun.GetText('Project3','Label_3') == "":
+			Fun.MessageBox("请先登录,再进行增加!")
+			return
 		sys.path.append("E:/github/TKinterDesigner-master/Project3")
 		topLevel = tkinter.Toplevel()
 		topLevel.attributes("-toolwindow", 1)
@@ -69,8 +134,6 @@ def Button_3_onCommand(uiName,widgetName):
 		import Add
 		Add.Add(topLevel)
 		tkinter.Tk.wait_window(topLevel)
-		InputDataArray=Add.Fun.GetInputDataArray(uiName)
-		print(InputDataArray)
 		# 增加
 		pass
 	except Exception as e:
@@ -95,7 +158,9 @@ def Button_2_onCommand(uiName,widgetName):
 			res = [i for i in res if cp in i[7]]
 		if fh != " ":
 			res = eval(f"[i for i in res if i[9] != '' and i[9] {fh} {count}]")
-		print(res)
+		if not res:
+			Fun.MessageBox("未找到相关数据")
+			return
 		for item in res:
 			treeview.insert('', 'end', values=item)
 		# 查询
@@ -103,17 +168,20 @@ def Button_2_onCommand(uiName,widgetName):
 	except Exception as e:
 		Fun.MessageBox(f"Error: {e}")
 def Button_20_onCommand(uiName,widgetName):
-	value_list = GridBase.getallData(uiName, 'ListView_8')
-	string = '\n'.join([','.join([str(j) for j in i]) for i in value_list])
-	name = "probe card list"
-	if not os.path.exists(name):
-		os.mkdir(name)
-	time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y%m%d%H%M%S")
-	with open(f"{name}\\{name}_{time_str}.csv", "w") as f:
-		f.write(string)
-	Fun.MessageBox("导出成功")
-	pass
-	# 导出当前界面
+	try:
+		value_list = GridBase.getallData(uiName, 'ListView_8')
+		string = '\n'.join([','.join([str(j) for j in i]) for i in value_list])
+		name = "probe card list"
+		if not os.path.exists(name):
+			os.mkdir(name)
+		time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y%m%d%H%M%S")
+		with open(f"{name}\\{name}_{time_str}.csv", "w") as f:
+			f.write(string)
+		Fun.MessageBox("导出成功")
+		pass
+		# 导出当前界面
+	except Exception as e:
+		Fun.MessageBox(f"Error: {e}")
 def Button_21_onCommand(uiName,widgetName):
 	pass
 	# 导出针卡使用记录

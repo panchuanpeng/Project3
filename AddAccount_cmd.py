@@ -61,6 +61,10 @@ def Button_6_onCommand(uiName,widgetName):
                 Fun.GetElement("Project3", 'Label_9').configure(bg="#00ff00")
                 Fun.SetText("Project3", 'user', user)
                 Fun.SetText("Project3", 'Label_9', user_info[0][3])
+                if user_info[0][3] == "admin":
+                    Fun.GetElement("Project3", "NoteBook_2").add(Fun.GetElement("Card", "root"))
+                if user_info[0][3] == "operator":
+                    Fun.GetElement("Project3", "NoteBook_2").hide(Fun.GetElement("Card", "root"))
             else:
                 Fun.MessageBox("密码错误")
         else:

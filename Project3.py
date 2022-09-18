@@ -46,6 +46,7 @@ class  Project3:
         PageFrame_3.place(x = 5,y = 25,width = 1390,height = 790)
         Card.Card(PageFrame_3,False)
         NoteBook_2.add(PageFrame_3,text = "针卡管理")
+        NoteBook_2.hide(PageFrame_3)
         Frame_11 = tkinter.Frame(Form_1)
         Fun.Register(uiName,'Frame_11',Frame_11)
         Fun.SetControlPlace(uiName,'Frame_11',1400,0,100,820)
@@ -97,5 +98,6 @@ class  Project3:
 #Create the root of Kinter 
 if  __name__ == '__main__':
     root = tkinter.Tk()
+    root.resizable(False, False)
     MyDlg = Project3(root)
     root.mainloop()
