@@ -73,6 +73,11 @@ def editcard(id, zk, sn, nsi, vd, yz, sy, cp, yj, td, wz, bz):
 	cdb.exec_cmd(sql1, zk, sn, nsi, vd, yz, sy, cp, yj, td, wz, bz, id)
 	cdb.close_connect()
 
+def takeoutcard(id, sy):
+	cdb = Cdb(DbName)
+	sql1 = "update card set sy=? where id=?"
+	cdb.exec_cmd(sql1, sy, id)
+	cdb.close_connect()
 
 def getData(table):
 	cdb = Cdb(DbName)

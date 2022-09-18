@@ -13,6 +13,14 @@ def editSelected(uiName,TreeViewName,*item):
     treeview.item(index, values=item)
     return treeview.item(index)['values']
 
+def takeoutcard(uiName,TreeViewName,item):
+    treeview = Fun.GetElement(uiName,TreeViewName)
+    index = treeview.selection()
+    if(len(index) == 0):
+        return None
+    treeview.set(index, "使用状态", item)
+    return treeview.item(index)['values']
+
 def deleteSelected(uiName,TreeViewName):
     treeview = Fun.GetElement(uiName,TreeViewName)
     index = treeview.selection()
