@@ -147,6 +147,7 @@ def Button_2_onCommand(uiName,widgetName):
 		vd = Fun.GetText(uiName, "Entry_16").strip()
 		zt = Fun.GetText(uiName, 'ComboBox_17')
 		cp = Fun.GetText(uiName, "Entry_18").strip()
+		wz = Fun.GetText(uiName, "Entry_23").strip()
 		count = Fun.GetText(uiName, "Entry_19").strip()
 		treeview = GridBase.clearData(uiName, 'ListView_8')
 		res = DbBase.getData("card")
@@ -158,6 +159,9 @@ def Button_2_onCommand(uiName,widgetName):
 			res = [i for i in res if zt in i[5]]
 		if cp != "":
 			res = [i for i in res if cp in i[7]]
+			print(res)
+		if wz != "":
+			res = [i for i in res if wz in i[10]]
 		if fh != " ":
 			res = eval(f"[i for i in res if i[9] != '' and i[9] {fh} {count}]")
 		if not res:

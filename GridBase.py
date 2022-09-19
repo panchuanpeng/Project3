@@ -45,7 +45,7 @@ def clearData(uiName,TreeViewName):
     return treeview
 
 def getallData(uiName,TreeViewName):
-    value_list = [["Id","针卡编号","S/N","NSI编号","Vendor","验证状态","使用状态","适用产品","Td 预警量","Td 使用量","位置","备注"]]
+    value_list = [["Id","针卡编号","S/N","Tip Length","Vendor","验证状态","使用状态","适用产品","Td 预警量","Td 使用量","位置","备注"]]
     treeview = Fun.GetElement(uiName,TreeViewName)
     obj = treeview.get_children()
     for i in obj:
