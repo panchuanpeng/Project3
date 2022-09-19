@@ -32,7 +32,7 @@ class  Add:
         Fun.Register(uiName,'Label_2',Label_2)
         Fun.SetControlPlace(uiName,'Label_2',40,40,100,20)
         Label_2.configure(relief = "flat")
-        Label_4 = tkinter.Label(Form_1,text="NSI编号")
+        Label_4 = tkinter.Label(Form_1,text="Tip Length")
         Fun.Register(uiName,'Label_4',Label_4)
         Fun.SetControlPlace(uiName,'Label_4',40,120,100,20)
         Label_4.configure(relief = "flat")

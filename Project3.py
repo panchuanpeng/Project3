@@ -98,6 +98,5 @@ class  Project3:
 #Create the root of Kinter 
 if  __name__ == '__main__':
     root = tkinter.Tk()
-    root.resizable(False, False)
     MyDlg = Project3(root)
     root.mainloop()
