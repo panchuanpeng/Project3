@@ -37,8 +37,6 @@ def Button_15_onCommand(uiName,widgetName):
         count = Fun.GetText(uiName, "Entry_12").strip()
         time1 = Fun.GetElement(uiName, "Calendar_21").selection()
         time2 = Fun.GetElement(uiName, "Calendar_22").selection()
-        print(time1)
-        print(time2)
         treeview = GridBase.clearData(uiName, 'ListView_2')
         res = DbBase.getData("uselist")
         if zk != "":

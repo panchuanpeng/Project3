@@ -53,7 +53,7 @@ def getallData(uiName,TreeViewName):
     return value_list
 
 def getuselist(uiName,TreeViewName):
-    value_list = [["Id","针卡编号","日期","操作人","变更前验证状态","变更后验证状态","变更前使用状态","变更后使用状态","Td数"]]
+    value_list = [["Id","针卡编号","日期","操作人","变更前验证状态","变更后验证状态","变更前使用状态","变更后使用状态","Td 数","位置","备注"]]
     treeview = Fun.GetElement(uiName,TreeViewName)
     obj = treeview.get_children()
     for i in obj:
