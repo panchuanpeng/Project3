@@ -13,6 +13,8 @@ ElementBGArray_IM={}
 import DbBase
 import GridBase
 import datetime
+from GetConfig import ConfigInfo
+config = ConfigInfo()
 def Button_14_onCommand(uiName,widgetName):
     # 增加 "Id","针卡编号","S/N","NSI编号","Vendor","验证状态","使用状态","适用产品","Td 预警量","Td 使用量","位置","备注"
     zk = Fun.GetText(uiName, 'Entry_8')

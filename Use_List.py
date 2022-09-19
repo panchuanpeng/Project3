@@ -31,7 +31,7 @@ class  Use_List:
         #Create the elements of root 
         Label_3 = tkinter.Label(Form_1,text="针卡编号")
         Fun.Register(uiName,'Label_3',Label_3,'针卡编号')
-        Fun.SetControlPlace(uiName,'Label_3',60,40,80,20)
+        Fun.SetControlPlace(uiName,'Label_3',50,40,80,20)
         Label_3.configure(relief = "flat")
         Entry_4_Variable = Fun.AddTKVariable(uiName,'Entry_4','')
         Entry_4 = tkinter.Entry(Form_1,textvariable=Entry_4_Variable)

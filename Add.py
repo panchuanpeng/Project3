@@ -129,14 +129,14 @@ class  Add:
         Fun.Register(uiName,'ComboBox_26',ComboBox_26)
         Fun.SetControlPlace(uiName,'ComboBox_26',180,200,380,20)
         ComboBox_26.configure(state = "readonly")
-        ComboBox_26["values"]=['等待验证','验证OK','验证Fail','损坏','维修','报废']
+        ComboBox_26["values"]=Add_cmd.config.ComboBox["zt"]
         ComboBox_26.current(0)
         ComboBox_27_Variable = Fun.AddTKVariable(uiName,'ComboBox_27')
         ComboBox_27 = tkinter.ttk.Combobox(Form_1,textvariable=ComboBox_27_Variable, state="readonly")
         Fun.Register(uiName,'ComboBox_27',ComboBox_27)
         Fun.SetControlPlace(uiName,'ComboBox_27',180,240,380,20)
         ComboBox_27.configure(state = "readonly")
-        ComboBox_27["values"]=['未使用','YCPTST1','YCPTST2','YCPTST3','YCPTST4','YCPTST5','YCPTST6']
+        ComboBox_27["values"]=Add_cmd.config.ComboBox["sy"]
         ComboBox_27.current(0)
         #Inital all element's Data 
         Fun.InitElementData(uiName)

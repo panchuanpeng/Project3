@@ -14,6 +14,8 @@ ElementBGArray_IM={}
 import DbBase
 import GridBase
 import datetime
+from GetConfig import ConfigInfo
+config = ConfigInfo()
 close_flag = 0
 def close():
 	global close_flag
@@ -183,6 +185,7 @@ def Button_20_onCommand(uiName,widgetName):
 	except Exception as e:
 		Fun.MessageBox(f"Error: {e}")
 def Button_21_onCommand(uiName,widgetName):
+	Fun.MessageBox("此功能暂无，请至使用记录导出")
 	pass
 	# 导出针卡使用记录
 

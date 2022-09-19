@@ -36,8 +36,8 @@ def Button_5_onCommand(uiName,widgetName):
     AddAccount_cmd.out_flag = 1
     Fun.SetText("Project3", 'user', "")
     Fun.SetText("Project3", 'Label_9', "")
-    Fun.GetElement("Project3", 'user').configure(bg="#eaeaea")
-    Fun.GetElement("Project3", 'Label_9').configure(bg="#eaeaea")
+    Fun.GetElement("Project3", 'user').configure(bg="#ffffff")
+    Fun.GetElement("Project3", 'Label_9').configure(bg="#ffffff")
     Fun.GetElement("Project3", "NoteBook_2").hide(Fun.GetElement("Card", "root"))
     # 退出
     pass
