@@ -80,6 +80,15 @@ def getcard(zk):
     cdb.close_connect()
     return res[0]
 
+def edittd(zk, td):
+    cdb = Cdb(DbName)
+    sql1 = "select * from card where zk=?"
+    res = cdb.exec_query(sql1, zk)
+    td = td + res[0][9]
+    sql2 = "update card set td=? where zk=?"
+    cdb.exec_cmd(sql2, td, zk)
+    cdb.close_connect()
+
 def takeoutcard(id, sy):
     cdb = Cdb(DbName)
     sql1 = "update card set sy=? where id=?"
@@ -144,7 +153,7 @@ def adduse(zk, rq, user, yzq, yzh, syq, syh, td):
 
 
 if __name__ == '__main__':
-    getcard("T9-1")
+    edittd("T9-2", 500)
     # inituselist()
     # adduse("T9-1","20220202","NE00443","OK","OK","TT","BB", 1000)
     # cdb = Cdb(DbName)
