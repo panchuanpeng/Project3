@@ -98,6 +98,12 @@ def takeoutcard(id, sy):
     cdb.exec_cmd(sql1, sy, id)
     cdb.close_connect()
 
+def returncard(id, nsi, sy, wz, bz):
+    cdb = Cdb(DbName)
+    sql1 = "update card set nsi=?, sy=?, wz=?, bz=? where id=?"
+    cdb.exec_cmd(sql1, nsi, sy, wz, bz, id)
+    cdb.close_connect()
+
 def getData(table):
     cdb = Cdb(DbName)
     sql2 = f"select * from {table}"
@@ -139,16 +145,16 @@ def edituser(user, password, admin):
 def inituselist():
     cdb = Cdb(DbName)
     sql = """create table if not exists uselist(id integer primary key autoincrement not null,zk varchar(100),
-rq varchar(100),user varchar(100),yzq varchar(100),yzh varchar(100),syq varchar(100),syh varchar(100),td integer)
-    """.replace("\n", "")
+    rq varchar(100),user varchar(100),tip varchar(100),yzq varchar(100),yzh varchar(100),syq varchar(100),syh varchar(100),td integer,
+    wz varchar(100),bz varchar(100))""".replace("\n", "")
     cdb.exec_cmd(sql)
     cdb.close_connect()
 
 
-def adduse(zk, rq, user, yzq, yzh, syq, syh, td):
+def adduse(zk, rq, user, tip, yzq, yzh, syq, syh, td, wz, bz):
     cdb = Cdb(DbName)
-    sql1 = "insert into uselist (zk, rq, user, yzq, yzh, syq, syh, td) values (?,?,?,?,?,?,?,?)"
-    cdb.exec_cmd(sql1, zk, rq, user, yzq, yzh, syq, syh, td)
+    sql1 = "insert into uselist (zk, rq, user, tip, yzq, yzh, syq, syh, td, wz, bz) values (?,?,?,?,?,?,?,?,?,?,?)"
+    cdb.exec_cmd(sql1, zk, rq, user, tip, yzq, yzh, syq, syh, td, wz, bz)
     sql2 = "select max(id) from uselist"  # "select max(id) from user"
     res = cdb.exec_query(sql2)
     cdb.close_connect()
@@ -156,6 +162,11 @@ def adduse(zk, rq, user, yzq, yzh, syq, syh, td):
 
 
 if __name__ == '__main__':
+    # cdb = Cdb(DbName)
+    # sql1 = "drop table uselist"
+    # cdb.exec_cmd(sql1)
+    # cdb.close_connect()
+
     edittd("T9-99", 500)
     # inituselist()
     # adduse("T9-1","20220202","NE00443","OK","OK","TT","BB", 1000)

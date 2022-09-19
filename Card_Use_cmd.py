@@ -7,15 +7,17 @@ import tkinter
 import tkinter.filedialog
 from   tkinter import *
 import Fun
-ElementBGArray={}
-ElementBGArray_Resize={}
-ElementBGArray_IM={}
+ElementBGArray={}  
+ElementBGArray_Resize={} 
+ElementBGArray_IM={} 
 
 import DbBase
 import GridBase
 import socket
 import datetime
 DbBase.initcard()
+from GetConfig import ConfigInfo
+config = ConfigInfo()
 close_flag = 0
 def close():
 	global close_flag
@@ -50,23 +52,19 @@ def Button_4_onCommand(uiName,widgetName):
 		if close_flag == 1:
 			return
 		password = Fun.GetInputDataArray("AddAccount")['Entry_3'][0]
-		if password == Fun.GetUserData('Project3', 'Label_3', 'password'):
-			# 领用功能区
-			item = GridBase.getSelected('Card_Use', 'ListView_8')
-			item = DbBase.getcard(item[1])
-			zk = item[1]
-			yzq = item[5]
-			syq = item[6]
-			td = item[9]
-			time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
-			user = Fun.GetText('Project3', 'Label_3')
-			name = "未使用"
-			item = GridBase.takeoutcard(uiName, 'ListView_8', name)
-			DbBase.takeoutcard(item[0], name)
-			DbBase.adduse(zk, time_str, user, yzq, yzq, syq, name, td)
-			Fun.MessageBox("归还成功")
-		else:
+		if password != Fun.GetUserData('Project3', 'Label_3', 'password'):
 			Fun.MessageBox("密码错误")
+			return
+		# 归还功能区
+		sys.path.append("E:/github/TKinterDesigner-master/Project3")
+		topLevel = tkinter.Toplevel()
+		topLevel.attributes("-toolwindow", 1)
+		topLevel.wm_attributes("-topmost", 1)
+		import Back
+		Back.Back(topLevel)
+		tkinter.Tk.wait_window(topLevel)
+		InputDataArray = Fun.GetInputDataArray("Back")
+		print(InputDataArray)
 		# 归还
 		pass
 	except Exception as e:
@@ -100,22 +98,25 @@ def Button_3_onCommand(uiName,widgetName):
 		if close_flag == 1:
 			return
 		password = Fun.GetInputDataArray("AddAccount")['Entry_3'][0]
-		if password == Fun.GetUserData('Project3','Label_3','password'):
-			# 领用功能区
-			item = DbBase.getcard(item[1])
-			zk = item[1]
-			yzq = item[5]
-			syq = item[6]
-			td = item[9]
-			time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
-			user = Fun.GetText('Project3', 'Label_3')
-			name = socket.gethostname()
-			item = GridBase.takeoutcard(uiName,'ListView_8',name)
-			DbBase.takeoutcard(item[0], name)
-			DbBase.adduse(zk, time_str, user, yzq, yzq, syq, name, td)
-			Fun.MessageBox("领用成功")
-		else:
+		if password != Fun.GetUserData('Project3', 'Label_3', 'password'):
 			Fun.MessageBox("密码错误")
+			return
+		# 领用功能区
+		item = DbBase.getcard(item[1])
+		zk = item[1]
+		tip = item[3]
+		yzq = item[5]
+		syq = item[6]
+		td = item[9]
+		wz = item[10]
+		bz = item[11]
+		time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
+		user = Fun.GetText('Project3', 'Label_3')
+		name = socket.gethostname()
+		item = GridBase.takeoutcard(uiName,'ListView_8',name)
+		DbBase.takeoutcard(item[0], name)
+		DbBase.adduse(zk, time_str, user,tip, yzq, yzq, syq, name, td, wz, bz)
+		Fun.MessageBox("领用成功")
 		# 领用
 		pass
 	except Exception as e:
@@ -130,6 +131,8 @@ def Button_2_onCommand(uiName,widgetName):
 		treeview = GridBase.clearData(uiName, 'ListView_8')
 		res = DbBase.getData("card")
 		res = [i for i in res if "验证OK" in i[5]]
+		for state in config.ComboBox["sy"][1:]:
+			res = [i for i in res if state != i[6]]
 		if zk != "":
 			res = [i for i in res if zk in i[1]]
 		if vd != "":

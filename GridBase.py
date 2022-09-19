@@ -21,6 +21,17 @@ def takeoutcard(uiName,TreeViewName,item):
     treeview.set(index, "使用状态", item)
     return treeview.item(index)['values']
 
+def returncard(uiName,TreeViewName,*item):
+    treeview = Fun.GetElement(uiName,TreeViewName)
+    index = treeview.selection()
+    if(len(index) == 0):
+        return None
+    treeview.set(index, "Tip Length", item[0])
+    treeview.set(index, "使用状态", item[1])
+    treeview.set(index, "位置", item[2])
+    treeview.set(index, "备注", item[3])
+    return treeview.item(index)['values']
+
 def deleteSelected(uiName,TreeViewName):
     treeview = Fun.GetElement(uiName,TreeViewName)
     index = treeview.selection()

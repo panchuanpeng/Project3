@@ -108,7 +108,7 @@ def Button_5_onCommand(uiName,widgetName):
 		user = Fun.GetText('Project3', 'Label_3')
 		item = GridBase.deleteSelected(uiName, 'ListView_8')
 		item = DbBase.getcard(item[1])
-		DbBase.adduse(item[1], time_str, user, item[5], "删除", item[6], "未使用", item[9])
+		DbBase.adduse(item[1], time_str, user, item[3], item[5], "删除", item[6], "删除", item[9], item[10], item[11])
 		DbBase.deletecard(item[0])
 		# 删除
 		pass

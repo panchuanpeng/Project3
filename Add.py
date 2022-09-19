@@ -63,6 +63,7 @@ class  Add:
         Fun.Register(uiName,'Entry_10',Entry_10)
         Fun.SetControlPlace(uiName,'Entry_10',180,120,380,20)
         Entry_10.configure(relief = "sunken")
+        Entry_10.bind("<KeyRelease>",Fun.EventFunction_Adaptor(Add_cmd.Entry_22_onKey, uiName=uiName, widgetName="Entry_10"))
         Entry_11_Variable = Fun.AddTKVariable(uiName,'Entry_11','')
         Entry_11 = tkinter.Entry(Form_1,textvariable=Entry_11_Variable)
         Fun.Register(uiName,'Entry_11',Entry_11)
