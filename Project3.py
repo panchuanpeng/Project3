@@ -17,23 +17,26 @@ import tkinter.font
 class  Project3:
     def __init__(self,root,isTKroot = True):
         uiName = self.__class__.__name__
+        self.uiName = uiName
         Fun.Register(uiName,'UIClass',self)
         self.root = root
+        self.isTKroot = isTKroot
         Fun.Register(uiName,'root',root)
         style = Project3_sty.SetupStyle()
         if isTKroot == True:
             root.title("Form1")
             Fun.CenterDlg(uiName,root,1500,820)
             root['background'] = '#efefef'
+            root.bind('<Configure>',self.Configure)
         Form_1= tkinter.Canvas(root,width = 10,height = 4)
-        Form_1.place(x = 0,y = 0,width = 1500,height = 820)
+        Form_1.pack(fill=BOTH,expand=True)
         Form_1.configure(bg = "#efefef")
         Form_1.configure(highlightthickness = 0)
         Fun.Register(uiName,'Form_1',Form_1)
         #Create the elements of root 
-        NoteBook_2 = tkinter.ttk.Notebook(Form_1)
+        NoteBook_2 = tkinter.ttk.Notebook(Form_1, width= 1400, height=820)
         Fun.Register(uiName,'NoteBook_2',NoteBook_2)
-        Fun.SetControlPlace(uiName,'NoteBook_2',0,0,1400,820)
+        Fun.SetControlPack(uiName, 'NoteBook_2', tkinter.BOTH, tkinter.LEFT, 0, 0)
         PageFrame_1 = tkinter.ttk.Frame(NoteBook_2)
         PageFrame_1.place(x = 5,y = 25,width = 1390,height = 790)
         Card_Use.Card_Use(PageFrame_1,False)
@@ -46,10 +49,9 @@ class  Project3:
         PageFrame_3.place(x = 5,y = 25,width = 1390,height = 790)
         Card.Card(PageFrame_3,False)
         NoteBook_2.add(PageFrame_3,text = "针卡管理")
-        NoteBook_2.hide(PageFrame_3)
-        Frame_11 = tkinter.Frame(Form_1)
+        Frame_11 = tkinter.Frame(Form_1,width = 100,height = 820)
         Fun.Register(uiName,'Frame_11',Frame_11)
-        Fun.SetControlPlace(uiName,'Frame_11',1400,0,100,820)
+        Fun.SetControlPack(uiName,'Frame_11',tkinter.Y,tkinter.RIGHT,0,0)
         Frame_11.configure(bg = "#ffffff")
         Frame_11.configure(relief = "flat")
         Label_3 = tkinter.Label(Frame_11,text="")
@@ -95,6 +97,17 @@ class  Project3:
         #Add Some Logic Code Here: (Keep This Line of comments)
 
 
+
+        #Exit Application: (Keep This Line of comments)
+        if self.isTKroot == True:
+            self.root.protocol('WM_DELETE_WINDOW', self.Exit)
+    def Exit(self):
+        if self.isTKroot == True:
+            self.root.destroy()
+
+    def Configure(self,event):
+        if self.root == event.widget:
+            pass
 #Create the root of Kinter 
 if  __name__ == '__main__':
     root = tkinter.Tk()
