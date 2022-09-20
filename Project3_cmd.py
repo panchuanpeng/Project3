@@ -101,6 +101,7 @@ def Button_11_onCommand(uiName,widgetName):
     try:
         item = Fun.GetText(uiName, 'ComboBox_12').lower()
         import subprocess
+        os.chdir(os.path.split(config.exe[item])[0])
         child = subprocess.Popen(config.exe[item], shell=True)
         print(child)
     except Exception as e:
