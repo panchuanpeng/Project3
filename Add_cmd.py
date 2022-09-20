@@ -33,7 +33,7 @@ def Button_14_onCommand(uiName,widgetName):
     time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
     user = Fun.GetText('Project3', 'Label_3')
     if tip == "":
-        Fun.MessageBox("请输入Tip Length")
+        Fun.MessageBox("添加失败，请输入Tip Length!")
         return
     if (txt == "修改"):
         item = GridBase.getSelected('Card', 'ListView_8')

@@ -23,6 +23,7 @@ class ConfigInfo(object):
     def __init__(self):
         self.ComboBox = getConfigDict('ComboBox')
         self.exe = getConfigDict('EXE')
+        self.product = getConfigDict("Product")
 
 
 
@@ -30,6 +31,7 @@ if __name__ == "__main__":
     config = ConfigInfo()
     print(config.ComboBox)
     print(config.exe)
+    print(config.product)
 # # 获取全部的section
 # def readConfig():
 #     secs = config.sections()

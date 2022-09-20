@@ -44,7 +44,7 @@ def Button_11_onCommand(uiName,widgetName):
     time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
     user = Fun.GetText('Project3', 'Label_3')
     if tip == "":
-        Fun.MessageBox("请输入Tip Length")
+        Fun.MessageBox("归还失败，请输入Tip Length!")
         return
     if int(tip) - int(tip_ref) <= 0:
         sy = "Waring"

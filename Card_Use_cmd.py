@@ -86,47 +86,49 @@ def Button_3_onCommand(uiName,widgetName):
 		if (item == None):
 			Fun.MessageBox("请先选择针卡,再进行领用!")
 			return
-		con = tkinter.messagebox.askyesno("警告", f"该针卡已在{item[6]}使用，是否继续领用")
-		if con:
-			sys.path.append("E:/github/TKinterDesigner-master/Project3")
-			topLevel = tkinter.Toplevel()
-			topLevel.attributes("-toolwindow", 1)
-			topLevel.wm_attributes("-topmost", 1)
-			topLevel.protocol('WM_DELETE_WINDOW', close)
-			import AddAccount
-			AddAccount.AddAccount(topLevel)
-			Fun.SetText("AddAccount", 'Button_6', '确认')
-			Fun.SetText("AddAccount", 'Entry_2', Fun.GetText('Project3','Label_3'))
-			Fun.GetElement("AddAccount", 'Entry_2')["state"] = "disabled"
-			Fun.GetElement("AddAccount", 'Label_8').destroy()
-			Fun.GetElement("AddAccount", 'Label_9').destroy()
-			Fun.GetElement("AddAccount", 'Entry_10').destroy()
-			Fun.GetElement("AddAccount", 'Entry_11').destroy()
-			tkinter.Tk.wait_window(topLevel)
-			if close_flag == 1:
+		if item[6] != "正常":
+			con = tkinter.messagebox.askyesno("警告", f"该针卡已在{item[6]}使用，是否继续领用")
+			if not con:
 				return
-			password = Fun.GetInputDataArray("AddAccount")['Entry_3'][0]
-			if password != Fun.GetUserData('Project3', 'Label_3', 'password'):
-				Fun.MessageBox("密码错误")
-				return
-			# 领用功能区
-			item = DbBase.getcard(item[1])
-			zk = item[1]
-			tip = item[3]
-			yzq = item[5]
-			syq = item[6]
-			td = item[9]
-			wz = item[10]
-			bz = item[11]
-			time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
-			user = Fun.GetText('Project3', 'Label_3')
-			name = socket.gethostname()
-			item = GridBase.takeoutcard(uiName,'ListView_8',name)
-			DbBase.takeoutcard(item[0], name)
-			DbBase.adduse(zk, time_str, user,tip, yzq, yzq, syq, name, td, wz, bz)
-			Fun.MessageBox("领用成功")
-			# 领用
-			pass
+		sys.path.append("E:/github/TKinterDesigner-master/Project3")
+		topLevel = tkinter.Toplevel()
+		topLevel.attributes("-toolwindow", 1)
+		topLevel.wm_attributes("-topmost", 1)
+		topLevel.protocol('WM_DELETE_WINDOW', close)
+		import AddAccount
+		AddAccount.AddAccount(topLevel)
+		Fun.SetText("AddAccount", 'Button_6', '确认')
+		Fun.SetText("AddAccount", 'Entry_2', Fun.GetText('Project3','Label_3'))
+		Fun.GetElement("AddAccount", 'Entry_2')["state"] = "disabled"
+		Fun.GetElement("AddAccount", 'Label_8').destroy()
+		Fun.GetElement("AddAccount", 'Label_9').destroy()
+		Fun.GetElement("AddAccount", 'Entry_10').destroy()
+		Fun.GetElement("AddAccount", 'Entry_11').destroy()
+		tkinter.Tk.wait_window(topLevel)
+		if close_flag == 1:
+			return
+		password = Fun.GetInputDataArray("AddAccount")['Entry_3'][0]
+		if password != Fun.GetUserData('Project3', 'Label_3', 'password'):
+			Fun.MessageBox("密码错误")
+			return
+		# 领用功能区
+		item = DbBase.getcard(item[1])
+		zk = item[1]
+		tip = item[3]
+		yzq = item[5]
+		syq = item[6]
+		td = item[9]
+		wz = item[10]
+		bz = item[11]
+		time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
+		user = Fun.GetText('Project3', 'Label_3')
+		name = socket.gethostname()
+		item = GridBase.takeoutcard(uiName,'ListView_8',name)
+		DbBase.takeoutcard(item[0], name)
+		DbBase.adduse(zk, time_str, user,tip, yzq, yzq, syq, name, td, wz, bz)
+		Fun.MessageBox("领用成功")
+		# 领用
+		pass
 	except Exception as e:
 		Fun.MessageBox(f"Error: {e}")
 def Button_2_onCommand(uiName,widgetName):
