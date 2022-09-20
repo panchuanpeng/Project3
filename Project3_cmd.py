@@ -17,7 +17,8 @@ import AddAccount_cmd
 DbBase.inituser()
 DbBase.initcard()
 DbBase.inituselist()
-
+from GetConfig import ConfigInfo
+config = ConfigInfo()
 def table_change(event):
     tab_dict = {"针卡领用": ["Card_Use","ListView_8"], "针卡管理": ["Card","ListView_8"], "使用记录": ["Use_List","ListView_2"]}
     tab = event.widget.tab('current')['text']
@@ -96,4 +97,13 @@ def Button_10_onCommand(uiName,widgetName):
         Fun.MessageBox("您没有相关权限")
     pass
     # 权限管理
-
+def Button_11_onCommand(uiName,widgetName):
+    try:
+        item = Fun.GetText(uiName, 'ComboBox_12').lower()
+        import subprocess
+        child = subprocess.Popen(config.exe[item], shell=True)
+        print(child)
+    except Exception as e:
+        Fun.MessageBox(f"Error: {e}")
+    pass
+    # 运行子程序

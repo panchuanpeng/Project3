@@ -14,7 +14,7 @@ config.read(local, encoding='utf-8')
 
 def getConfigDict(section):
     config_dict = dict(config.items(section))
-    for key,value in config_dict.items():
+    for key, value in config_dict.items():
         config_dict[key] = eval(value)
     return config_dict
 
@@ -22,12 +22,14 @@ def getConfigDict(section):
 class ConfigInfo(object):
     def __init__(self):
         self.ComboBox = getConfigDict('ComboBox')
+        self.exe = getConfigDict('EXE')
 
 
 
 if __name__ == "__main__":
     config = ConfigInfo()
     print(config.ComboBox)
+    print(config.exe)
 # # 获取全部的section
 # def readConfig():
 #     secs = config.sections()

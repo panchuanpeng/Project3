@@ -94,6 +94,18 @@ class  Project3:
         Fun.SetControlPlace(uiName,'Button_10',20,240,60,28)#lock
         Button_10.configure(bg = "#00ffff")
         Button_10.configure(command=lambda:Project3_cmd.Button_10_onCommand(uiName,"Button_10"))
+        Button_11 = tkinter.Button(Frame_11, text="运行程序")
+        Fun.Register(uiName, 'Button_11', Button_11)
+        Fun.SetControlPlace(uiName, 'Button_11', 20, 340, 60, 28)  # lock
+        Button_11.configure(bg="#00ffff")
+        Button_11.configure(command=lambda: Project3_cmd.Button_11_onCommand(uiName, "Button_11"))
+        ComboBox_12_Variable = Fun.AddTKVariable(uiName, 'ComboBox_12')
+        ComboBox_12 = tkinter.ttk.Combobox(Frame_11, textvariable=ComboBox_12_Variable, state="readonly")
+        Fun.Register(uiName, 'ComboBox_12', ComboBox_12)
+        Fun.SetControlPlace(uiName, 'ComboBox_12', 0, 300, 100, 30)
+        ComboBox_12.configure(state="readonly")
+        ComboBox_12["values"] =[i.upper() for i in list(Project3_cmd.config.exe.keys())]
+        ComboBox_12.current(0)
         #Inital all element's Data 
         Fun.InitElementData(uiName)
         #Add Some Logic Code Here: (Keep This Line of comments)
