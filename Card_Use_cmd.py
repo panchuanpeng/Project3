@@ -137,6 +137,9 @@ def Button_2_onCommand(uiName,widgetName):
 		cp = Fun.GetText(uiName, "Entry_18").strip()
 		count = Fun.GetText(uiName, "Entry_19").strip()
 		treeview = GridBase.clearData(uiName, 'ListView_8')
+		treeview.tag_configure("tag_green", background="#00ff00")
+		treeview.tag_configure("tag_red", background="red")
+		treeview.tag_configure("tag_y", background="#ff8000")
 		res = DbBase.getData("card")
 		res = [i for i in res if "验证OK" in i[5]]
 		for state in config.ComboBox["sy"][1:]:
@@ -151,7 +154,17 @@ def Button_2_onCommand(uiName,widgetName):
 			res = eval(f"[i for i in res if i[9] != '' and i[9] {fh} {count}]")
 		print(res)
 		for item in res:
-			treeview.insert('', 'end', values=item)
+			if item[5] == "验证OK":
+				if item[6] not in config.ComboBox["sy"]:
+					treeview.insert('', 'end', values=item, tags="tag_green")
+				elif item[6] in config.ComboBox["sy"][1:]:
+					treeview.insert('', 'end', values=item, tags="tag_red")
+				else:
+					treeview.insert('', 'end', values=item)
+			elif item[5] == "等待验证":
+				treeview.insert('', 'end', values=item, tags="tag_y")
+			else:
+				treeview.insert('', 'end', values=item, tags="tag_red")
 		# 查询
 		pass
 	except Exception as e:

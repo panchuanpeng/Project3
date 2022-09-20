@@ -168,7 +168,17 @@ def Button_2_onCommand(uiName,widgetName):
 			Fun.MessageBox("未找到相关数据")
 			return
 		for item in res:
-			treeview.insert('', 'end', values=item)
+			if item[5] == "验证OK":
+				if item[6] not in config.ComboBox["sy"]:
+					treeview.insert('', 'end', values=item, tags="tag_green")
+				elif item[6] in config.ComboBox["sy"][1:]:
+					treeview.insert('', 'end', values=item, tags="tag_red")
+				else:
+					treeview.insert('', 'end', values=item)
+			elif item[5] == "等待验证":
+				treeview.insert('', 'end', values=item, tags="tag_y")
+			else:
+				treeview.insert('', 'end', values=item, tags="tag_red")
 		# 查询
 		pass
 	except Exception as e:
