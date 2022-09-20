@@ -23,7 +23,6 @@ def table_change(event):
     tab_dict = {"针卡领用": ["Card_Use","ListView_8"], "针卡管理": ["Card","ListView_8"], "使用记录": ["Use_List","ListView_2"]}
     tab = event.widget.tab('current')['text']
     GridBase.clearData(tab_dict[tab][0], tab_dict[tab][1])
-
 def Button_4_onCommand(uiName,widgetName):
     sys.path.append("E:/github/TKinterDesigner-master/Project3")
     topLevel = tkinter.Toplevel()
@@ -102,7 +101,7 @@ def Button_11_onCommand(uiName,widgetName):
         item = Fun.GetText(uiName, 'ComboBox_12').lower()
         import subprocess
         os.chdir(os.path.split(config.exe[item])[0])
-        child = subprocess.Popen(config.exe[item], shell=True)
+        child = subprocess.Popen(config.exe[item])
         print(child)
     except Exception as e:
         Fun.MessageBox(f"Error: {e}")
