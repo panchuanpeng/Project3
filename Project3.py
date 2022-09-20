@@ -50,6 +50,7 @@ class  Project3:
         Card.Card(PageFrame_3,False)
         NoteBook_2.add(PageFrame_3,text = "针卡管理")
         NoteBook_2.hide(PageFrame_3)
+        NoteBook_2.bind("<<NotebookTabChanged>>", Project3_cmd.table_change)
         Frame_11 = tkinter.Frame(Form_1,width = 100,height = 820)
         Fun.Register(uiName,'Frame_11',Frame_11)
         Fun.SetControlPack(uiName,'Frame_11',tkinter.Y,tkinter.RIGHT,0,0)

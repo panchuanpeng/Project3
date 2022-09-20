@@ -11,11 +11,18 @@ ElementBGArray={}
 ElementBGArray_Resize={} 
 ElementBGArray_IM={} 
 
+import GridBase
 import DbBase
 import AddAccount_cmd
 DbBase.inituser()
 DbBase.initcard()
 DbBase.inituselist()
+
+def table_change(event):
+    tab_dict = {"针卡领用": ["Card_Use","ListView_8"], "针卡管理": ["Card","ListView_8"], "使用记录": ["Use_List","ListView_2"]}
+    tab = event.widget.tab('current')['text']
+    GridBase.clearData(tab_dict[tab][0], tab_dict[tab][1])
+
 def Button_4_onCommand(uiName,widgetName):
     sys.path.append("E:/github/TKinterDesigner-master/Project3")
     topLevel = tkinter.Toplevel()
