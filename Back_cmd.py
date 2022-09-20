@@ -2,7 +2,6 @@
 import sys
 import os
 from   os.path import abspath, dirname
-
 sys.path.append(abspath(dirname(__file__)))
 import tkinter
 import tkinter.filedialog
@@ -17,6 +16,7 @@ import GridBase
 import datetime
 from GetConfig import ConfigInfo
 config = ConfigInfo()
+files = None
 def Entry_6_onKey(event,uiName,widgetName):
     input_char = Fun.GetText(uiName,widgetName)
     temp_char = ""
@@ -26,8 +26,6 @@ def Entry_6_onKey(event,uiName,widgetName):
     Fun.SetText(uiName, widgetName, temp_char)
     pass
     #只输入数字
-
-
 def Button_11_onCommand(uiName,widgetName):
     item = GridBase.getSelected('Card_Use', 'ListView_8')
     tip_ref = str(item[3]).split("-")[0]
@@ -56,3 +54,11 @@ def Button_11_onCommand(uiName,widgetName):
     Fun.MessageBox("归还成功")
     # 确定
     pass
+def Button_13_onCommand(uiName,widgetName):
+    global files
+    Fun.SetText(uiName, "Label_14", "")
+    files = tkinter.filedialog.askopenfilenames()
+    if files != "":
+        Fun.SetText(uiName, "Label_14", f"已选择{len(files)}个文件")
+    pass
+    # 选取照片

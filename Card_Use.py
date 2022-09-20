@@ -14,28 +14,31 @@ import tkinter.font
 class  Card_Use:
     def __init__(self,root,isTKroot = True):
         uiName = self.__class__.__name__
+        self.uiName = uiName
         Fun.Register(uiName,'UIClass',self)
         self.root = root
+        self.isTKroot = isTKroot
         Fun.Register(uiName,'root',root)
         style = Card_Use_sty.SetupStyle()
         if isTKroot == True:
             root.title("Form1")
             Fun.CenterDlg(uiName,root,1400,800)
             root['background'] = '#efefef'
+            root.bind('<Configure>',self.Configure)
         Form_1= tkinter.Canvas(root,width = 10,height = 4)
-        Form_1.place(x = 0,y = 0,width = 1400,height = 800)
+        Form_1.pack(fill=BOTH,expand=True)
         Form_1.configure(bg = "#efefef")
         Form_1.configure(highlightthickness = 0)
         Fun.Register(uiName,'Form_1',Form_1)
         #Create the elements of root 
         Button_4 = tkinter.Button(Form_1,text="归还")
         Fun.Register(uiName,'Button_4',Button_4)
-        Fun.SetControlPlace(uiName,'Button_4',1190,110,100,28)
+        Fun.SetControlPlace(uiName,'Button_4',820,110,100,28)
         Button_4.configure(bg = "#00ffff")
         Button_4.configure(command=lambda:Card_Use_cmd.Button_4_onCommand(uiName,"Button_4"))
         Button_3 = tkinter.Button(Form_1,text="领用")
         Fun.Register(uiName,'Button_3',Button_3)
-        Fun.SetControlPlace(uiName,'Button_3',610,110,100,28)
+        Fun.SetControlPlace(uiName,'Button_3',430,110,100,28)
         Button_3.configure(bg = "#00ffff")
         Button_3.configure(command=lambda:Card_Use_cmd.Button_3_onCommand(uiName,"Button_3"))
         Button_2 = tkinter.Button(Form_1,text="查询")
@@ -129,11 +132,27 @@ class  Card_Use:
         Fun.Register(uiName,'Entry_21',Entry_21)
         Fun.SetControlPlace(uiName,'Entry_21',820,40,140,20)
         Entry_21.configure(relief = "sunken")
+        Button_22 = tkinter.Button(Form_1,text="NI计数")
+        Fun.Register(uiName,'Button_22',Button_22)
+        Fun.SetControlPlace(uiName,'Button_22',1190,110,100,28)
+        Button_22.configure(bg = "#00ffff")
+        Button_22.configure(command=lambda:Card_Use_cmd.Button_22_onCommand(uiName,"Button_22"))
         #Inital all element's Data 
         Fun.InitElementData(uiName)
         #Add Some Logic Code Here: (Keep This Line of comments)
 
 
+
+        #Exit Application: (Keep This Line of comments)
+        if self.isTKroot == True:
+            self.root.protocol('WM_DELETE_WINDOW', self.Exit)
+    def Exit(self):
+        if self.isTKroot == True:
+            self.root.destroy()
+
+    def Configure(self,event):
+        if self.root == event.widget:
+            pass
 #Create the root of Kinter 
 if  __name__ == '__main__':
     root = tkinter.Tk()

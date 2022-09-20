@@ -94,11 +94,11 @@ class  Project3:
         Fun.SetControlPlace(uiName,'Button_10',20,240,60,28)#lock
         Button_10.configure(bg = "#00ffff")
         Button_10.configure(command=lambda:Project3_cmd.Button_10_onCommand(uiName,"Button_10"))
-        Button_11 = tkinter.Button(Frame_11, text="运行程序")
-        Fun.Register(uiName, 'Button_11', Button_11)
-        Fun.SetControlPlace(uiName, 'Button_11', 20, 340, 60, 28)  # lock
-        Button_11.configure(bg="#00ffff")
-        Button_11.configure(command=lambda: Project3_cmd.Button_11_onCommand(uiName, "Button_11"))
+        Button_13 = tkinter.Button(Frame_11, text="运行程序")
+        Fun.Register(uiName, 'Button_13', Button_13)
+        Fun.SetControlPlace(uiName, 'Button_13', 20, 340, 60, 28)  # lock
+        Button_13.configure(bg="#00ffff")
+        Button_13.configure(command=lambda: Project3_cmd.Button_13_onCommand(uiName, "Button_13"))
         ComboBox_12_Variable = Fun.AddTKVariable(uiName, 'ComboBox_12')
         ComboBox_12 = tkinter.ttk.Combobox(Frame_11, textvariable=ComboBox_12_Variable, state="readonly")
         Fun.Register(uiName, 'ComboBox_12', ComboBox_12)

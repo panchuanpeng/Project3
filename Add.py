@@ -145,21 +145,6 @@ class  Add:
         ComboBox_27.configure(state = "readonly")
         ComboBox_27["values"]=Add_cmd.config.ComboBox["sy"]
         ComboBox_27.current(0)
-
-        ComboBox_26_Variable = Fun.AddTKVariable(uiName, 'ComboBox_26')
-        ComboBox_26 = tkinter.ttk.Combobox(Form_1, textvariable=ComboBox_26_Variable, state="readonly")
-        Fun.Register(uiName, 'ComboBox_26', ComboBox_26)
-        Fun.SetControlPlace(uiName, 'ComboBox_26', 180, 200, 380, 20)
-        ComboBox_26.configure(state="readonly")
-        ComboBox_26["values"] = Add_cmd.config.ComboBox["zt"]
-        ComboBox_26.current(0)
-        ComboBox_26_Variable = Fun.AddTKVariable(uiName, 'ComboBox_26')
-        ComboBox_26 = tkinter.ttk.Combobox(Form_1, textvariable=ComboBox_26_Variable, state="readonly")
-        Fun.Register(uiName, 'ComboBox_26', ComboBox_26)
-        Fun.SetControlPlace(uiName, 'ComboBox_26', 180, 200, 380, 20)
-        ComboBox_26.configure(state="readonly")
-        ComboBox_26["values"] = Add_cmd.config.ComboBox["zt"]
-        ComboBox_26.current(0)
         #Inital all element's Data 
         Fun.InitElementData(uiName)
         #Add Some Logic Code Here: (Keep This Line of comments)

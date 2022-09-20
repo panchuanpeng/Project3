@@ -96,7 +96,7 @@ def Button_10_onCommand(uiName,widgetName):
         Fun.MessageBox("您没有相关权限")
     pass
     # 权限管理
-def Button_11_onCommand(uiName,widgetName):
+def Button_13_onCommand(uiName,widgetName):
     try:
         item = Fun.GetText(uiName, 'ComboBox_12').lower()
         import subprocess

@@ -171,4 +171,7 @@ def Button_2_onCommand(uiName,widgetName):
 		pass
 	except Exception as e:
 		Fun.MessageBox(f"Error: {e}")
+def Button_22_onCommand(uiName,widgetName):
+	pass
+	# NI计数
 
