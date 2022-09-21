@@ -193,6 +193,7 @@ def Button_20_onCommand(uiName,widgetName):
 		time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y%m%d%H%M%S")
 		with open(f"{name}\\{name}_{time_str}.csv", "w") as f:
 			f.write(string)
+		os.startfile(f"{name}\\{name}_{time_str}.csv")
 		Fun.MessageBox("导出成功")
 		pass
 		# 导出当前界面

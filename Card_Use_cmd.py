@@ -171,7 +171,48 @@ def Button_2_onCommand(uiName,widgetName):
 		pass
 	except Exception as e:
 		Fun.MessageBox(f"Error: {e}")
+def Button_5_onCommand(uiName,widgetName):
+	try:
+		item = GridBase.getSelected(uiName, 'ListView_8')
+		if (item == None):
+			Fun.MessageBox("请先选择针卡,再进行查看!")
+			return
+		pic_dir = os.getcwd() + f"/Card Image/{item[1]}"
+		if os.path.exists(pic_dir):
+			os.startfile(pic_dir)
+		else:
+			Fun.MessageBox("未查找到相关图片!")
+		pass
+		# 照片查看
+	except Exception as e:
+		Fun.MessageBox(f"Error: {e}")
 def Button_22_onCommand(uiName,widgetName):
-	pass
-	# NI计数
+	try:
+		import tkinter.filedialog
+		import tarfile
+		file = tkinter.filedialog.askopenfilename()
+		tar = tarfile.open(file, "r:gz")
+		for member in tar.getmembers():
+			f = tar.extractfile(member)
+			if f is not None:
+				text = f.read().decode()
+				card_id = [i for i in text.split("\n") if i.startswith("PROBE CARD ID")][0].split(":")[-1].strip()
+				test_die = sum([int(i.split(":")[-1].strip()) for i in text.split("\n") if i.startswith("TESTED DIE")])
+				DbBase.edittd(card_id, test_die)
+				item = DbBase.getcard(card_id)
+				zk = item[1]
+				tip = item[3]
+				yzq = item[5]
+				syq = item[6]
+				td = item[9]
+				wz = item[10]
+				bz = item[11]
+				time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
+				user = "NI MANUAL"
+				DbBase.adduse(zk, time_str, user, tip, yzq, yzq, syq, syq, td, wz, bz)
+				Fun.MessageBox("统计Td成功")
+		pass
+		# NI计数
+	except Exception as e:
+		Fun.MessageBox(f"Error: {e}")
 

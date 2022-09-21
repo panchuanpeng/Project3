@@ -24,6 +24,7 @@ def Button_16_onCommand(uiName,widgetName):
         time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y%m%d%H%M%S")
         with open(f"{name}\\probe card use list_{time_str}.csv", "w") as f:
             f.write(string)
+        os.startfile(f"{name}\\probe card use list_{time_str}.csv")
         Fun.MessageBox("导出成功")
         pass
         #导出当前界面

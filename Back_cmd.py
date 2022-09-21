@@ -16,7 +16,7 @@ import GridBase
 import datetime
 from GetConfig import ConfigInfo
 config = ConfigInfo()
-files = None
+files = []
 def Entry_6_onKey(event,uiName,widgetName):
     input_char = Fun.GetText(uiName,widgetName)
     temp_char = ""
@@ -51,6 +51,12 @@ def Button_11_onCommand(uiName,widgetName):
     item = GridBase.returncard("Card_Use", 'ListView_8', f"{tip_ref}-{tip}", sy, wz, bz)
     DbBase.returncard(item[0], f"{tip_ref}-{tip}", sy, wz, bz)
     DbBase.adduse(zk, time_str, user, f"{tip_ref}-{tip}", yzq, yzq, syq, sy, td, wz, bz)
+    pic_dir = os.getcwd() + f"/Card Image/{zk}"
+    if not os.path.exists(pic_dir):
+        os.makedirs(pic_dir)
+    import shutil
+    for index, file in enumerate(files):
+        shutil.copy(file, pic_dir + f"/{time_str.replace(':', '-')}_{index+1}."+file.split(".")[-1])
     Fun.MessageBox("归还成功")
     # 确定
     pass
