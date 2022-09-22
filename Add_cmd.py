@@ -32,18 +32,38 @@ def Button_14_onCommand(uiName,widgetName):
     Fun.GetElement(uiName, 'root').destroy()
     time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
     user = Fun.GetText('Project3', 'Label_3')
-    if tip == "":
-        Fun.MessageBox("添加失败，请输入Tip Length!")
-        return
     if (txt == "修改"):
+        if tip == "":
+            Fun.MessageBox("修改失败，请输入Tip Length!")
+            return
         item = GridBase.getSelected('Card', 'ListView_8')
-        yzq = item[5]
-        syq = item[6]
+        yzq = DbBase.getcard(item[1])[5]
+        syq = DbBase.getcard(item[1])[6]
         item = GridBase.editSelected('Card', 'ListView_8', zk, sn, tip, vd, yz, sy, cp, yj, td, wz, bz)
         DbBase.editcard(item[0], zk, sn, tip, vd, yz, sy, cp, yj, td, wz, bz)
         DbBase.adduse(zk, time_str, user, tip, yzq, yz, syq, sy, td, wz, bz)
         Fun.MessageBox("修改成功")
+    if (txt == "批量修改"):
+        value_list = ["", zk, sn, tip, vd, yz, sy, cp, yj, td, wz, bz]
+        change_list = []
+        items = GridBase.getallSelected('Card', 'ListView_8')
+        for item in items:
+            res = list(DbBase.getcard(item[1]))
+            yzq = res[5]
+            syq = res[6]
+            for index, i in enumerate(res):
+                if value_list[index] != "":
+                    res[index] = value_list[index]
+            change_list.append(res)
+            DbBase.editcard(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8], res[9], res[10], res[11])
+            DbBase.adduse(res[1], time_str, user, res[3], yzq, res[5], syq, res[6], res[9], res[10], res[11])
+        GridBase.editallSelected('Card', 'ListView_8', change_list)
+        Fun.MessageBox("批量修改成功")
+        pass
     else:
+        if tip == "":
+            Fun.MessageBox("添加失败，请输入Tip Length!")
+            return
         card_list = [i[1] for i in DbBase.getData("card")]
         if zk in card_list:
             Fun.MessageBox("该针卡编号已存在")

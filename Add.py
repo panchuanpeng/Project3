@@ -75,7 +75,7 @@ class  Add:
         Fun.Register(uiName,'Label_3',Label_3)
         Fun.SetControlPlace(uiName,'Label_3',40,80,100,20)
         Label_3.configure(relief = "flat")
-        Button_14 = tkinter.Button(Form_1,text="增加",anchor="w")
+        Button_14 = tkinter.Button(Form_1,text="增加")
         Fun.Register(uiName,'Button_14',Button_14)
         Fun.SetControlPlace(uiName,'Button_14',260,520,100,28)
         Button_14.configure(bg = "#00ffff")

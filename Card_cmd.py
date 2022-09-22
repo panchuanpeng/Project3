@@ -200,7 +200,53 @@ def Button_20_onCommand(uiName,widgetName):
 	except Exception as e:
 		Fun.MessageBox(f"Error: {e}")
 def Button_21_onCommand(uiName,widgetName):
-	Fun.MessageBox("此功能暂无，请至使用记录导出")
-	pass
-	# 导出针卡使用记录
+	try:
+		global close_flag
+		close_flag = 0
+		if Fun.GetText('Project3', 'Label_3') == "":
+			Fun.MessageBox("请先登录,再进行修改!")
+			return
+		entry_list = 'Entry_8,Entry_9,Entry_10,Entry_11,ComboBox_26,ComboBox_27,Entry_14,Entry_15,Entry_16,Entry_17,Entry_18'.split(
+			",")
+		item = GridBase.getallSelected(uiName, 'ListView_8')
+		if (item == None):
+			Fun.MessageBox("请先选择数据,再进行修改!")
+			return
+		topLevel = tkinter.Toplevel()
+		topLevel.attributes("-toolwindow", 1)
+		topLevel.wm_attributes("-topmost", 1)
+		topLevel.protocol('WM_DELETE_WINDOW', close)
+		import AddAccount
+		AddAccount.AddAccount(topLevel)
+		Fun.SetText("AddAccount", 'Button_6', '确认')
+		Fun.SetText("AddAccount", 'Entry_2', Fun.GetText('Project3', 'Label_3'))
+		Fun.GetElement("AddAccount", 'Entry_2')["state"] = "disabled"
+		Fun.GetElement("AddAccount", 'Label_8').destroy()
+		Fun.GetElement("AddAccount", 'Label_9').destroy()
+		Fun.GetElement("AddAccount", 'Entry_10').destroy()
+		Fun.GetElement("AddAccount", 'Entry_11').destroy()
+		tkinter.Tk.wait_window(topLevel)
+		if close_flag == 1:
+			return
+		password = Fun.GetInputDataArray("AddAccount")['Entry_3'][0]
+		if password != Fun.GetUserData('Project3', 'Label_3', 'password'):
+			Fun.MessageBox("密码错误")
+			return
+		sys.path.append("E:/github/TKinterDesigner-master/Project3")
+		topLevel = tkinter.Toplevel()
+		topLevel.attributes("-toolwindow", 1)
+		topLevel.wm_attributes("-topmost", 1)
+		import Add
+		Add.Add(topLevel)
+		Fun.SetText("Add", "Button_14", "批量修改")
+		for index, entry in enumerate(entry_list):
+			Fun.SetText("Add", entry, "")
+		Fun.GetElement("Add", 'Entry_8')["state"] = "disabled"
+		tkinter.Tk.wait_window(topLevel)
+		InputDataArray = Add.Fun.GetInputDataArray(uiName)
+		print(InputDataArray)
+		# 批量修改
+		pass
+	except Exception as e:
+		Fun.MessageBox(f"Error: {e}")
 

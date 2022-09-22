@@ -150,7 +150,7 @@ class  Card:
         Fun.SetControlPlace(uiName,'Button_20',1000,110,100,28)
         Button_20.configure(bg = "#00ffff")
         Button_20.configure(command=lambda:Card_cmd.Button_20_onCommand(uiName,"Button_20"))
-        Button_21 = tkinter.Button(Form_1,text="导出使用记录")
+        Button_21 = tkinter.Button(Form_1,text="批量修改")
         Fun.Register(uiName,'Button_21',Button_21)
         Fun.SetControlPlace(uiName,'Button_21',1190,110,100,28)
         Button_21.configure(bg = "#00ffff")

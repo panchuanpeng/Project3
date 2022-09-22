@@ -13,6 +13,14 @@ def editSelected(uiName,TreeViewName,*item):
     treeview.item(index, values=item)
     return treeview.item(index)['values']
 
+def editallSelected(uiName,TreeViewName,item):
+    treeview = Fun.GetElement(uiName,TreeViewName)
+    indexs = treeview.selection()
+    if(len(indexs) == 0):
+        return None
+    for index in indexs:
+        treeview.item(index, values=item[indexs.index(index)])
+
 def takeoutcard(uiName,TreeViewName,item):
     treeview = Fun.GetElement(uiName,TreeViewName)
     index = treeview.selection()
@@ -47,6 +55,16 @@ def getSelected(uiName,TreeViewName):
     if(len(index) == 0):
         return None
     return treeview.item(index)['values']
+
+def getallSelected(uiName,TreeViewName):
+    value_list = []
+    treeview = Fun.GetElement(uiName,TreeViewName)
+    indexs = treeview.selection()
+    if(len(indexs) == 0):
+        return None
+    for index in indexs:
+        value_list.append(treeview.item(index)['values'])
+    return value_list
 
 def clearData(uiName,TreeViewName):
     treeview = Fun.GetElement(uiName,TreeViewName)
