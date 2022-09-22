@@ -33,9 +33,6 @@ def Button_14_onCommand(uiName,widgetName):
     time_str = datetime.datetime.strftime(datetime.datetime.now(), "%Y-%m-%d %H:%M:%S")
     user = Fun.GetText('Project3', 'Label_3')
     if (txt == "修改"):
-        if tip == "":
-            Fun.MessageBox("修改失败，请输入Tip Length!")
-            return
         item = GridBase.getSelected('Card', 'ListView_8')
         yzq = DbBase.getcard(item[1])[5]
         syq = DbBase.getcard(item[1])[6]
@@ -61,9 +58,6 @@ def Button_14_onCommand(uiName,widgetName):
         Fun.MessageBox("批量修改成功")
         pass
     else:
-        if tip == "":
-            Fun.MessageBox("添加失败，请输入Tip Length!")
-            return
         card_list = [i[1] for i in DbBase.getData("card")]
         if zk in card_list:
             Fun.MessageBox("该针卡编号已存在")
