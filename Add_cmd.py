@@ -40,7 +40,7 @@ def Button_14_onCommand(uiName,widgetName):
         DbBase.editcard(item[0], zk, sn, tip, vd, yz, sy, cp, yj, td, wz, bz)
         DbBase.adduse(zk, time_str, user, tip, yzq, yz, syq, sy, td, wz, bz)
         Fun.MessageBox("修改成功")
-    if (txt == "批量修改"):
+    elif (txt == "批量修改"):
         value_list = ["", zk, sn, tip, vd, yz, sy, cp, yj, td, wz, bz]
         change_list = []
         items = GridBase.getallSelected('Card', 'ListView_8')
